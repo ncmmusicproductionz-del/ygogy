@@ -1,0 +1,10 @@
+# Step 1: run once with only discovery on, then read agent-classes.txt to find the real class/method names.
+discover.prefix=zombie.
+discover.file=agent-classes.txt
+
+# Step 2: hook methods that return a float/double (zoom, FOV, scale...). kind:class#method
+#hook.1=float:zombie.iso.IsoCamera#getZoom
+#scale.zombie.iso.IsoCamera.getZoom=1.5
+
+# Optional live-tuning window
+#menu=true
