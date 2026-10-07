@@ -1,0 +1,10 @@
+name=Atomics Render Framework
+id=ARF
+description=True 3D first/third-person view, deferred PBR pipeline and shader packs for Project Zomboid. Requires ZombieBuddy.
+author=AtomicGlitcherHD
+modversion=0.1.0
+versionMin=42.0.0
+require=\ZombieBuddy
+javaJarFile=ARF.jar
+javaPkgName=dev.atomics.arf.patches
+zbVersionMin=0.1.0

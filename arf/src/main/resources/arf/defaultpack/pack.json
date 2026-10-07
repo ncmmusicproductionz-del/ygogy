@@ -1,0 +1,7 @@
+{
+  "name": "ARF Default",
+  "version": "0.1.0",
+  "author": "AtomicGlitcherHD",
+  "minApi": 1,
+  "stages": ["shadow", "gbuffer_terrain", "gbuffer_object", "gbuffer_character", "gbuffer_foliage", "deferred_lighting", "final"]
+}

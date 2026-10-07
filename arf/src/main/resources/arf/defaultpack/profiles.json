@@ -1,0 +1,6 @@
+{
+  "LOW":    { "SHADOWS": false, "BLOOM_STRENGTH": 0.0 },
+  "MEDIUM": { "SHADOWS": true,  "BLOOM_STRENGTH": 0.08 },
+  "HIGH":   { "SHADOWS": true,  "BLOOM_STRENGTH": 0.12 },
+  "ULTRA":  { "SHADOWS": true,  "BLOOM_STRENGTH": 0.2 }
+}
