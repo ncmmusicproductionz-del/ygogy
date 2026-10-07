@@ -54,7 +54,7 @@ class ArfTest {
         assertFalse(ArfVersion.parse("4.2.9").atLeast(ArfVersion.parse("4.3")));
     }
     @Test void patchConflictsDetected() {
-        assertEquals(List.of("zombie.iso.IsoCamera#update"), PatchTargets.conflicts(Set.of("zombie.iso.IsoCamera#update", "other#x")));
+        assertEquals(List.of("zombie.core.Core#EndFrameUI"), PatchTargets.conflicts(Set.of("zombie.core.Core#EndFrameUI", "other#x")));
     }
 
     // ---- snapshot ----

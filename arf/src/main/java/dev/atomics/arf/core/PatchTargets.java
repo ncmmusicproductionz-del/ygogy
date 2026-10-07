@@ -9,15 +9,15 @@ import java.util.TreeSet;
  * ARF's published patch target list ("class#method"). Other ZombieBuddy mods that patch the same method
  * collide with ARF, so the overlap is detected and reported at startup instead of silently breaking.
  *
- * <p>The names below are PLACEHOLDERS: they must be confirmed against a B42 install (see README, "Wiring
- * ZombieBuddy"). Keep this list short and centralised so each game update is a one-file fix.
+ * <p>Both targets below are confirmed against the ZombieBuddy jar, which patches the same two methods itself
+ * (so they exist in B42). Camera and input targets are NOT listed yet: they need class names from a real B42
+ * install (the Byte Buddy discovery agent in the repo root can dump them). Keep this list short and centralised
+ * so each game update is a one-file fix.
  */
 public final class PatchTargets {
     public static final Set<String> ARF = Set.of(
-        "zombie.iso.IsoCamera#update",                 // camera: hand view to CameraRig
-        "zombie.iso.IsoWorld#render",                  // renderer entry: swap in ARF frame graph
-        "zombie.input.GameKeyboard#isKeyDown",         // input remap
-        "zombie.input.Mouse#update"                    // mouse look
+        "zombie.gameStates.IngameState#UpdateStuff",   // main thread: WorldSnapshot tick
+        "zombie.core.Core#EndFrameUI"                  // render thread: world/UI boundary
     );
 
     private PatchTargets() {}

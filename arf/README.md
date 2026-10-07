@@ -27,10 +27,19 @@ world is drawn and how camera/movement input is mapped. Built from *Atomics Rend
 | `content` | `MeshResolver` (explicit, procedural, billboard, fallback box), `MaterialRegistry` |
 | `resources/arf` | Default pack (`defaultpack/`) and standard library (`lib/`: pbr, lighting, noise, iris-compat) |
 
-## What is NOT done (needs your game install)
-- **ZombieBuddy wiring.** I had no ZombieBuddy jar or Project Zomboid build to compile against, so there are no
-  `@Patch` classes or `arf.*` Lua bridge. `core/PatchTargets` lists *placeholder* class names; confirm them against
-  a B42 install, then add thin patch classes that feed `CameraRig`, `InputMapper`, `SnapshotBuffer`, and `MeshResolver`.
-- **OpenGL 4.3 backend** for `RenderDevice` (LWJGL, via PZ's existing context).
-- **Shaders are unvalidated.** Run them through `glslangValidator` or a real GL 4.3 context before trusting them.
+## ZombieBuddy wiring (verified against ZombieBuddy.jar)
+`src/zb/java/dev/atomics/arf/patches` is compiled only when `libs/ZombieBuddy.jar` exists (not committed; copy your
+jar there). `mod.info` sets `javaPkgName=dev.atomics.arf.patches`, so ZombieBuddy finds `Main.main(String[])` and the
+`@Patch` classes there.
+- `Main` registers on `Callbacks.onDisplayCreate`, then `ArfRuntime.bootstrap` checks ZombieBuddy and GL (GL via reflection).
+- `Patch_IngameState_UpdateStuff` (main-thread tick) and `Patch_Core_EndFrameUI` (render thread) are no-ops until bootstrap
+  passes and disable ARF for the session on any exception.
+
+## What is NOT done
+- **Camera/input patches and the `arf.*` Lua API.** Real camera/input class names are still unknown; no Project Zomboid jar here.
+  Run the repo-root discovery agent on a B42 install and send me `agent-classes.txt`.
+- **WorldSnapshot is not filled from live game state** (frame counter only); needs verified PZ accessors.
+- **OpenGL 4.3 backend** for `RenderDevice`; nothing draws yet.
+- **Shaders are unvalidated.** Run them through `glslangValidator` or a real GL 4.3 context.
+- ZombieBuddy may ask users to approve unsigned mods on first load.
 - Sphere-cast collision (`CollisionProbe`) must be supplied from PZ tile data.

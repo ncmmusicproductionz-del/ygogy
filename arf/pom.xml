@@ -32,4 +32,37 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <!-- Patch layer: compiled only when libs/ZombieBuddy.jar is present (it is not committed). The core builds without it. -->
+    <profile>
+      <id>zombiebuddy</id>
+      <activation><file><exists>libs/ZombieBuddy.jar</exists></file></activation>
+      <dependencies>
+        <dependency>
+          <groupId>me.zed_0xff</groupId>
+          <artifactId>zombie-buddy</artifactId>
+          <version>local</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/libs/ZombieBuddy.jar</systemPath>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <version>3.6.0</version>
+            <executions>
+              <execution>
+                <phase>generate-sources</phase>
+                <goals><goal>add-source</goal></goals>
+                <configuration><sources><source>src/zb/java</source></sources></configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

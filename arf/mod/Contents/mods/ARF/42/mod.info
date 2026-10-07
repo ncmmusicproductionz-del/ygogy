@@ -6,3 +6,5 @@ modversion=0.1.0
 versionMin=42.0.0
 require=\ZombieBuddy
 javaJarFile=ARF.jar
+javaPkgName=dev.atomics.arf.patches
+zbVersionMin=0.1.0
